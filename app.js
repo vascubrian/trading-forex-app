@@ -10,8 +10,7 @@ require('console-stamp')(console, '[HH:MM:ss.l]');
 // application config
 const { config, envConfig } = require('./lib/config');
 const basicAuthKeys = require('./lib/BasicAuthKeys.js');
-const helper = require('./lib/helper.js');
-// const mysqlConnector = require('./lib/MysqlConnector');
+const mysqlConnector = require('./lib/MysqlConnector');
 
 // session settings
 app.use(
@@ -92,15 +91,11 @@ router.get('/autologin', (req, res) => {
 router.get('/dashboard', (req, res) => {
   // checks whether user is loggedin
   if (req.session.email != null) {
-    return res.render(path.resolve(__dirname, helper.userDashboard(req.session.userType).page), {
+    return res.render(path.resolve(__dirname, './views/dashboard.html'), {
       appTitle: config.appTitle,
       appOwner: config.appOwner,
       email: req.session.email,
-      pagePartial: helper.userDashboard(req.session.userType).pagePartial,
-      fullName: req.session.fullName,
-      facility: req.session.facility,
-      userType: req.session.userType,
-      apiToken: jsonWebToken.createToken(basicAuthKeys.keys.username, basicAuthKeys.keys.password, config.sessionSecret, envConfig.urlBase, req.session.userType, req.sessionStore.sessions, envConfig.loggedInUrl)
+      apiToken: jsonWebToken.createToken(basicAuthKeys.keys.username, basicAuthKeys.keys.password, config.sessionSecret)
     });
   }
 
@@ -110,6 +105,60 @@ router.get('/dashboard', (req, res) => {
     appOwner: config.appOwner,
     aboutApplication: config.aboutApplication
   });
+});
+
+// register user
+router.post('/register-userAccount', (req, res) => {
+  // checks whether user is loggedin
+  if (req.session.email != null) {
+    return res.redirect('/');
+  }
+  // register user
+  const email = req.body.email;
+  const password = req.body.password;
+  try {
+    mysqlConnector.connection.query('SELECT * FROM cwg_users WHERE email = ?', [email], function (error, results) {
+      if (results.length > 0) {
+        console.log(error);
+        res.status(400).json({ message: 'User email already exists' });
+      } else {
+        mysqlConnector.connection.query('INSERT INTO cwg_users (email,password,account_status) VALUES (?,?,?)', [email, password, 'PENDING'], function (error, results, fields) {
+          if (results) {
+            req.session.email = email;
+            res.status(200).json({ message: 'your account has been created successfully' });
+          } else {
+            res.status(400).json({ message: 'Failed to create account (' + error + ')' });
+          }
+        });
+      }
+    });
+  } catch (err) {
+    res.status(400).json({ message: 'Failed to create account-' + err });
+  }
+});
+
+// login user
+router.post('/login-userAccount', (req, res) => {
+  // checks whether user is loggedin
+  if (req.session.email != null) {
+    return res.redirect('/');
+  }
+  // login user
+  const email = req.body.email;
+  const password = req.body.password;
+  try {
+    mysqlConnector.connection.query('SELECT * FROM cwg_users WHERE email = ? and password = ?', [email, password], function (error, results) {
+      if (results.length > 0) {
+        req.session.email = email;
+        res.status(200).json({ message: 'Logged successfully' });
+      } else {
+        console.log(error);
+        res.status(400).json({ message: 'Invalid credentials' });
+      }
+    });
+  } catch (err) {
+    res.status(400).json({ message: 'Failed to create account-' + err });
+  }
 });
 
 // logout
