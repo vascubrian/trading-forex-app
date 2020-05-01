@@ -11,7 +11,7 @@ require('console-stamp')(console, '[HH:MM:ss.l]');
 const { config, envConfig } = require('./lib/config');
 const basicAuthKeys = require('./lib/BasicAuthKeys.js');
 const helper = require('./lib/helper.js');
-const mysqlConnector = require('./lib/MysqlConnector');
+// const mysqlConnector = require('./lib/MysqlConnector');
 
 // session settings
 app.use(
