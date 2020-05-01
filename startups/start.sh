@@ -2,6 +2,6 @@
 ENV=$1
 CUSTOMER=$2
 # stop service
-pm2 stop 0
+NODE_ENV=$ENV CONFIG_DIR=/home/$CUSTOMER/cwg-market/$ENV/config/cwg-market/  pm2 stop /home/$CUSTOMER/cwg-market/$ENV/app.js 
 # start service
-pm2 start npm -- start
+NODE_ENV=$ENV CONFIG_DIR=/home/$CUSTOMER/cwg-market/$ENV/config/cwg-market/  pm2 start /home/$CUSTOMER/cwg-market/$ENV/app.js 
