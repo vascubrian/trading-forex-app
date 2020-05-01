@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="The Device allows expectant women in low resource settings to continuously monitor the conditions of their fetus, which affects almost 50 percent of females in rural Uganda. Distinguish between contractions and labor pains.">
+<meta name="author" content="Wekebere Co. Ltd">
+<meta name="keyword" content="Pregnacy monitoring,contraction tracker,medical device company,labor monitoring,taking guess work out of pregnacy,fetal monitor">
+<meta name="apiToken" content="<%= apiToken%>">
+<title><%= appTitle %> | Login</title>
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--===============================================================================================-->
+</head>
+<body>
+	 <div class="container">
+        <div class="card card-container">
+            <img id="profile-img" class="profile-img-card" src="images/wekebere_logo.jpeg" />
+            <p id="profile-name" class="profile-name-card"> <%= appTitle %></p>
+            <div class="form-signin">
+                <span id="validateUserAccount" class="reauth-email"></span>
+                <input type="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+                <a href="/enteremail">Forgot password?</a>
+                <input type="password" id="password" class="form-control" placeholder="Password" required>
+                <button id="login" class="btn btn-lg btn-primary btn-block btn-signin">Login</button>
+                <div class="center-link">
+                <a href="/signup">Sign up</a> |
+                <a href="/">Home</a>
+            	</div>
+             </div><!-- /form-signin -->
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+  <!-- app controller -->
+<!--===============================================================================================-->
+<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
+<script type="text/javascript" src="js/UserAccountcontroller.js"></script>
+<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+	"apiDefault":"api-prod",
+	"urlBase":"http://meuweke.koreasouth.cloudapp.azure.com:8085/wekebere-backend",
+	"loggedInUrl" :"http://wekedev:wekedev@2020@meuweke.koreasouth.cloudapp.azure.com:8084/wekebere-backend/",
+	"port":8010
+}

@@ -1,0 +1,12 @@
+{
+  "extends": ["semistandard"],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-arrow-callback": "error"
+  }
+}

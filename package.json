@@ -1,0 +1,78 @@
+{
+  "name": "wekebere-dashboard-frontend",
+  "version": "1.0.0",
+  "description": "Improving the health and wellbeing of women",
+  "main": "app.js",
+  "scripts": {
+    "test:normal": "mocha",
+    "semi": "semistandard",
+    "semi:fix": "semistandard --fix",
+    "watch": "parcel watch public/src/*.js --out-dir public/js",
+    "dev": "CONFIG_DIR=config run-p watch server",
+    "server": "node app.js",
+    "test": "npm run semi && npm run test:normal",
+    "build": "parcel build public/src/*.js --out-dir public/js"
+  },
+  "semistandard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "public/vendor/",
+      "public/js/",
+      "test/"
+    ],
+    "globals": [
+      "$",
+      "moment",
+      "btoa",
+      "atob",
+      "alert",
+      "FormData",
+      "jQuery",
+      "Audio"
+    ]
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "console-stamp": "^0.2.9",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
+    "log4js": "^6.1.0",
+    "mysql": "^2.18.1",
+    "request": "^2.88.0",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint-config-semistandard": "^15.0.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "mocha": "^6.2.1",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.4",
+    "semistandard": "^14.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Catalystcorp/CSV_Payments_Frontend.git"
+  },
+  "author": "enable.digital",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Catalystcorp/CSV_Payments_Frontend/issues"
+  },
+  "homepage": "https://github.com/Catalystcorp/CSV_Payments_Frontend#readme",
+  "keywords": [
+    "bulk-payments"
+  ]
+}

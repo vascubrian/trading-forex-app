@@ -1,0 +1,40 @@
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.company-bg-color{
+  color: white;
+  background-color: #3EA3F1;
+}
+.company-bg-color a{
+  color: white; 
+}
+.company-accent-color{
+  color: white;
+  background-color: #D895B6;
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+
+/*
+* Form styles
+*/
+.profile-name-card {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0 0;
+  min-height: 1em;
+}
