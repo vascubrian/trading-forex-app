@@ -78,15 +78,6 @@ router.get('/signup', (req, res) => {
   });
 });
 
-// auto login
-router.get('/autologin', (req, res) => {
-  req.session.email = req.query.email;
-  req.session.fullName = req.query.fullName;
-  req.session.facility = req.query.facility;
-  req.session.userType = req.query.userType;
-  res.redirect('/');
-});
-
 // dashboard controller
 router.get('/dashboard', (req, res) => {
   // checks whether user is loggedin
