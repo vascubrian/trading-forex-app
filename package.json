@@ -18,6 +18,7 @@
     "ignore": [
       "public/vendor/",
       "public/js/",
+      "public/trading/",
       "test/"
     ],
     "globals": [
