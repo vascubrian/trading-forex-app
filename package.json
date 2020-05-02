@@ -27,8 +27,7 @@
       "atob",
       "alert",
       "FormData",
-      "jQuery",
-      "Audio"
+      "jQuery"
     ]
   },
   "directories": {
