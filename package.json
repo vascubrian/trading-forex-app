@@ -18,6 +18,7 @@
     "ignore": [
       "public/vendor/",
       "public/js/",
+      "public/trading/",
       "test/"
     ],
     "globals": [
@@ -27,8 +28,7 @@
       "atob",
       "alert",
       "FormData",
-      "jQuery",
-      "Audio"
+      "jQuery"
     ]
   },
   "directories": {

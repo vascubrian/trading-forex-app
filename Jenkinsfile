@@ -4,8 +4,8 @@ pipeline {
 
     environment {
       CUSTOMER_NAME = "vascubrian"
-      PROJECT_NAME = "CWG-Market"
-      def sshCopy="vascubrian@meuweke.koreasouth.cloudapp.azure.com"
+      PROJECT_NAME = "project-name"
+      def sshCopy="server-app"
     }
       stages('deploy') {
 

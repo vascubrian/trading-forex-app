@@ -1,6 +1,6 @@
 module.exports = {
   branch: 'master',
-  repositoryUrl: 'https://github.com/tashobya/wekebere-dashboard-frontend.git',
+  repositoryUrl: 'https://github.com/vascubrian/cwg-market.git',
   // eslint-disable-next-line no-template-curly-in-string
   tagFormat: '${version}',
   plugins: [

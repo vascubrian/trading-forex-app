@@ -1,14 +1,6 @@
-import { parseJwt } from './utils/index';
-
 (function ($) {
-  const {
-    username,
-    password,
-    urlBase
-  } = parseJwt();
-
-  $('#confirmPassword').keypress(function (event) {
-    const password = $('#confirmPassword').val();
+  $('#password').keypress(function (event) {
+    const password = $('#password').val();
     if (password.length < 5) {
       $('#validateUserAccount').html('Weak password');
     } else {
@@ -16,65 +8,45 @@ import { parseJwt } from './utils/index';
     }
   });
   // register users
-  $('#confirmPassword').keypress(function (e) {
-    const key = e.which;
-    if (parseInt(key) === 13) {
-      registerUsers();
-      return false;
-    }
-  });
-
   $('#sign_up').click(function (event) {
     registerUsers();
   });
 
   function registerUsers () {
     const email = $('#email').val();
-    const fullName = $('#fullName').val();
     const userPassword = $('#password').val();
-    const confirmPassword = $('#confirmPassword').val();
-    const contact = $('#contact').val();
-    const userType = $('#userType').val();
-    const facility = $('#facility').val();
-    const recommendedBy = $('#recommendedBy').val();
-    if (email !== '' && fullName !== '' && userPassword !== '' && contact !== '' && recommendedBy !== '') {
-      if (userPassword !== confirmPassword || userPassword.length < 5) {
-        $('#validateUserAccount').html('Password is not matching or weak!!');
+    if (email !== '' && userPassword !== '') {
+      if (!isEmail(email)) {
+        $('#validateUserAccount').html('Provide a valid email!!');
       } else {
-      // GETTING STARTED
-        $('#sign_up').html('Submitting');
-        $('#sign_up').prop('disabled', true);
-        // AJAX
-        $.ajax({
-          url: urlBase + '/register-userAccount',
-          method: 'POST',
-          contentType: 'application/json',
-          crossDomain: true,
-          xhrFields: { withCredentials: true },
-          beforeSend (xhr) {
-            xhr.setRequestHeader('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
-          },
-          data: JSON.stringify(
-            {
-              fullName: fullName,
-              email: email,
-              password: userPassword,
-              contact: contact,
-              userType: userType,
-              facility: facility,
-              recommendedBy: recommendedBy
-            }),
-          success: function (response) {
-            window.location.href = '/autologin?fullName=' + encodeURIComponent(fullName) + '&userType=' + encodeURIComponent(userType) + '&email=' + encodeURIComponent(email) + '&facility=' + encodeURIComponent(facility) + '';
-          },
-          error: function (xhr) {
+        if (userPassword.length < 5) {
+          $('#validateUserAccount').html('Password is weak!!');
+        } else {
+          // GETTING STARTED
+          $('#sign_up').html('Submitting');
+          $('#sign_up').prop('disabled', true);
+          // AJAX
+          $.ajax({
+            url: '/register-userAccount',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(
+              {
+                email: email,
+                password: userPassword
+              }),
+            success: function (response) {
+              window.location.href = '/';
+            },
+            error: function (xhr) {
             // eslint-disable-next-line no-eval
-            const err = eval(`(${xhr.responseText})`); // FIXME: Remove use of `eval` as it's considered really bad.
-            $('#validateUserAccount').html(err.message);
-            $('#sign_up').prop('disabled', false);
-            $('#sign_up').html('Sign up');
-          }
-        });
+              const err = eval(`(${xhr.responseText})`); // FIXME: Remove use of `eval` as it's considered really bad.
+              $('#validateUserAccount').html(err.message);
+              $('#sign_up').prop('disabled', false);
+              $('#sign_up').html('Sign up');
+            }
+          });
+        }
       }
     } else {
       $('#validateUserAccount').html('All fields are required !!');
@@ -101,21 +73,16 @@ import { parseJwt } from './utils/index';
       $('#login').prop('disabled', true);
       // AJAX
       $.ajax({
-        url: urlBase + '/login-userAccount',
+        url: '/login-userAccount',
         method: 'POST',
         contentType: 'application/json',
-        crossDomain: true,
-        xhrFields: { withCredentials: true },
-        beforeSend (xhr) {
-          xhr.setRequestHeader('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
-        },
         data: JSON.stringify(
           {
             email: email,
             password: userPassword
           }),
         success: function (response) {
-          window.location.href = '/autologin?fullName=' + encodeURIComponent(response.fullName) + '&userType=' + encodeURIComponent(response.userType) + '&email=' + encodeURIComponent(response.email) + '&facility=' + encodeURIComponent(response.facility) + '';
+          window.location.href = '/';
         },
         error: function (xhr) {
           // eslint-disable-next-line no-eval
@@ -128,5 +95,10 @@ import { parseJwt } from './utils/index';
     } else {
       $('#validateUserAccount').html('All fields are required !!');
     }
+  }
+
+  function isEmail (email) {
+    const regex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    return regex.test(email);
   }
 })(jQuery);
